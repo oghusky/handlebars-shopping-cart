@@ -3,14 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var expressHbs = require("express-handlebars")
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
 // view engine setup
+// sets layouts folder to default
+// sets hbs to default name so we don't have to type out "handlebars" everytime
+app.engine(".hbs", expressHbs({ defaultLayout: "layout", extname: ".hbs" }));
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
